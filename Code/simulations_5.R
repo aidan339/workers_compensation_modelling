@@ -26,6 +26,11 @@ total_over_simulations = numeric(number_of_policy_holders)
 #Interest, Inflation and Discount Rates
 interest_data = read_excel('../Data/srcsc-2026-interest-and-inflation.xlsx')
 interest_data = as.data.frame(interest_data)
+interest_data = interest_data[3:nrow(interest_data), ]
+colnames(interest_data) = c('Inflation', 'Overnight_Bank', 'yr_1_annual_risk_free', 'yr_10_annual_risk_free')
+
+interest_data$Inflation = as.numeric(interest_data$Inflation)
+interest_data$yr_1_annual_risk_free = as.numeric(interest_data$yr_1_annual_risk_free)
 
 short_term_rates = interest_data$yr_1_annual_risk_free
 rates_ts = ts(short_term_rates, frequency = 1)
